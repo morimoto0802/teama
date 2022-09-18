@@ -1,0 +1,11 @@
+{
+    "title": "sample",
+    "bpm": "120",
+    "notes": [
+        {"timing": "5000", "type": "aka"},
+        {"timing": "5250", "type": "ki"},
+        {"timing": "5500", "tipe": "ao"},
+        {"timing": "5750", "type": "midori"},
+        {"timing": "6000", "type": "murasaki"}
+    ] 
+}
