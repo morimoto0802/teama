@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,12 +37,12 @@ public class GameManager : MonoBehaviour
     void OneEnable()
     {
         Play.onClick
-            .AsObservable()
-            .Sbscribe(_ => Play());
+           .AsObservable()
+           .Subscribe(_ => play());
 
         SetChart.onClick
             .AsObservable()
-            .Sunscribe(_ => loadChart());
+            .Subscribe(_ => loadChart());
     }
 
     void loadChart()
