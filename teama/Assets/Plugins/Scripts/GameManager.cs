@@ -30,12 +30,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform BeatPointmidori;
     [SerializeField] Transform BeatPointmurasaki;
 
+    float PlayTime;
+    float Distance;
+    float During;
+    bool isPlaying;
+    int GoIndex;
+
     string Title;
     int BPM;
     List<GameObject> Notes;
 
     void OneEnable()
     {
+        Distance = Math.Abs(BeatPointaka.position.y - SpawnPointaka.position.y);
+        During = 2 * 1000;
+        isPlaying = false;
+        GoIndex = 0;
+
+        Debug.Log(Distance);
+
         Play.onClick
            .AsObservable()
            .Subscribe(_ => play());
@@ -43,6 +56,16 @@ public class GameManager : MonoBehaviour
         SetChart.onClick
             .AsObservable()
             .Subscribe(_ => loadChart());
+
+        this.UpdateAsObservable()
+            .Where(_ => isPlaying)
+            .Where(_ => Notes.Count > GoIndex)
+            .Where(_ => Notes[GoIndex].GetComponent<NoteController>().getTiming() <= ((Time.time * 1000 - PlayTime) + During))
+            .Subscribe(_ =>
+            {
+                Notes[GoIndex].GetComponent<NoteController>().go(Distance, During);
+                GoIndex++;
+            });
     }
 
     void loadChart()
@@ -82,12 +105,16 @@ public class GameManager : MonoBehaviour
                 Note = Instantiate(murasaki, SpawnPointmurasaki.position, Quaternion.identity);
             }
 
+            Note.GetComponent<NoteController>().setParameter(type, timing);
+
             Notes.Add(Note);
         }
     }
 
     void play()
     {
+        PlayTime = Time.time * 1000;
+        isPlaying = true;
         Debug.Log("Game Start!");
     }
 }

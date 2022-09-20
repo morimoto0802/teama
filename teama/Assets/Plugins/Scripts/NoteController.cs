@@ -29,7 +29,7 @@ public class NoteController : MonoBehaviour
             });
     }
 
-    public void setParamator(string type, float timing) {
+    public void setParameter(string type, float timing) {
         Type = type;
         Timing = timing;
     }
