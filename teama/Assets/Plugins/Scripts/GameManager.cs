@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
             {
                 Note = Instantiate(midori, SpawnPointmidori.position, Quaternion.identity);
             }
-            else if (type == "murasaki")
+            else
             {
                 Note = Instantiate(murasaki, SpawnPointmurasaki.position, Quaternion.identity);
             }
