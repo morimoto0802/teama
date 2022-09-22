@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc46060153a5ba4491b5b8d7ef7eb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FilePath: Charts/Sample
+  FilePath: Assets/Charts/Sample
   Play: {fileID: 316961162}
   SetChart: {fileID: 588619137}
   aka: {fileID: 197425493}
