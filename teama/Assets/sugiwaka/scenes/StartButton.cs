@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TitleButton : MonoBehaviour
+public class StartButton : MonoBehaviour
 {
-    public void ClickStartButton()
+    public void Onclick()
     {
         AudioSource audio = GetComponent<AudioSource>();
         audio.Play();
