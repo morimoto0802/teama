@@ -100,9 +100,13 @@ public class GameManager : MonoBehaviour
             {
                 Note = Instantiate(midori, SpawnPointmidori.position, Quaternion.identity);
             }
-            else
+            else if (type == "murasaki")
             {
                 Note = Instantiate(murasaki, SpawnPointmurasaki.position, Quaternion.identity);
+            }
+            else
+            {
+                Note = Instantiate(aka, SpawnPointaka.position, Quaternion.identity);
             }
 
             Note.GetComponent<NoteController>().setParameter(type, timing);
