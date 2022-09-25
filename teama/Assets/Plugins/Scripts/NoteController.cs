@@ -25,7 +25,7 @@ public class NoteController : MonoBehaviour
             .Where(_ => isGo)
             .Subscribe(_ =>
             {
-                this.gameObject.transform.position = new Vector3(firstPos.y - Distance * (Time.time * 1000 - GoTime) / During, firstPos.x, firstPos.z);
+                this.gameObject.transform.position = new Vector3(firstPos.x,firstPos.y + Distance * (Time.time * 1000 - GoTime) / During, firstPos.z);
             });
     }
 

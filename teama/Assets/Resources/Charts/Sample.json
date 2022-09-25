@@ -2,10 +2,10 @@
     "title": "sample",
     "bpm": "120",
     "notes": [
-        {"timing": "5000", "type": "aka"},
-        {"timing": "5250", "type": "ki"},
-        {"timing": "5500", "tipe": "ao"},
-        {"timing": "5750", "type": "midori"},
-        {"timing": "6000", "type": "murasaki"}
+        {"timing": "2000", "type": "aka"},
+        {"timing": "2000", "type": "ki"},
+        {"timing": "2000", "tipe": "ao"},
+        {"timing": "2000", "type": "midori"},
+        {"timing": "2000", "type": "murasaki"}
     ] 
 }

@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc46060153a5ba4491b5b8d7ef7eb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FilePath: Assets/Resources/Charts/Sample
+  FilePath: Charts/Sample
   Play: {fileID: 316961162}
   SetChart: {fileID: 588619137}
   aka: {fileID: 197425493}
@@ -1166,6 +1166,7 @@ GameObject:
   - component: {fileID: 890122836}
   - component: {fileID: 890122835}
   - component: {fileID: 890122834}
+  - component: {fileID: 890122837}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1232,13 +1233,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890122833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &890122837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890122833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c292737a98ae3043a80bc8e86cfb859, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &943618998
 GameObject:
   m_ObjectHideFlags: 0

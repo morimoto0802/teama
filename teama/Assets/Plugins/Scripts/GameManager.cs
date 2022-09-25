@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     int BPM;
     List<GameObject> Notes;
 
-    void OneEnable()
+    void OnEnable()
     {
         Distance = Math.Abs(BeatPointaka.position.y - SpawnPointaka.position.y);
         During = 2 * 1000;
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         {
             string type = note["type"].Get<string>();
             float timing = float.Parse(note["timing"].Get<string>());
-
+            Debug.Log("TEST");
             GameObject Note;
             if (type == "aka")
             {
