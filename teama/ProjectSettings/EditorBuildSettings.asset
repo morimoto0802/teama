@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/sugiwaka/scenes/StartScene.unity
+    guid: 8e902494c0be5c84b8d7ae2161d32482
   m_configObjects: {}
