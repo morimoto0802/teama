@@ -9,6 +9,7 @@ using UniRx.Triggers;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] string FilePath;
+    [SerializeField] string ClipPath
 
     [SerializeField] Button Play;
     [SerializeField] Button SetChart;
