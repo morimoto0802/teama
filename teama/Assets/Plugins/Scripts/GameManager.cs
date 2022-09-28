@@ -54,6 +54,13 @@ public class GameManager : MonoBehaviour
         get { return SoundEffectSubject; }
     }
 
+    Subject<string> MessageEffectSubject = new Subject<string>();
+
+    public IObservable<string> OnMessageEffect
+    {
+        get { return MessageEffectSubject; }
+    }
+
     void OnEnable()
     {
         Music = this.GetComponent<AudioSource>();
