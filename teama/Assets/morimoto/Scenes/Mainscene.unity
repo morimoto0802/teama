@@ -737,8 +737,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -178}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 340, y: -178}
+  m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &316961162
 MonoBehaviour:
@@ -1152,12 +1152,12 @@ GameObject:
   - component: {fileID: 538190242}
   - component: {fileID: 538190241}
   m_Layer: 0
-  m_Name: Quad midori
+  m_Name: Quadmidori
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!328 &538190241
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -1187,7 +1187,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -1307,8 +1307,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -100}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 340, y: -100}
+  m_SizeDelta: {x: 100, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &588619137
 MonoBehaviour:
@@ -1727,7 +1727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &775221157
 Transform:
   m_ObjectHideFlags: 0
@@ -1879,7 +1879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &855863713
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2000,7 +2000,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 34.58591
+  field of view: 29.999113
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2026,7 +2026,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890122833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 500, y: 250, z: -800}
+  m_LocalPosition: {x: 400, y: 200, z: -800}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2667,6 +2667,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ef4c4b294bded604cadc0aeb9664e6d7, type: 3}
   m_PrefabInstance: {fileID: 1892063821}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1308828606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1308828608}
+  - component: {fileID: 1308828607}
+  m_Layer: 0
+  m_Name: HanabiEffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1308828607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308828606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7215231f1d45aa47b3b5de75d6f9405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameManager: {fileID: 117033927}
+  Quadaka: {fileID: 1617708773}
+  Quadki: {fileID: 1993822535}
+  Quadao: {fileID: 1433012439}
+  Quadmidori: {fileID: 538190240}
+  Quadmurasaki: {fileID: 1648756170}
+--- !u!4 &1308828608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308828606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 600, y: 200, z: -38.27631}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1433012439
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,12 +2731,12 @@ GameObject:
   - component: {fileID: 1433012441}
   - component: {fileID: 1433012440}
   m_Layer: 0
-  m_Name: Quad ao
+  m_Name: Quadao
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!328 &1433012440
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -2716,7 +2766,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -2915,12 +2965,12 @@ GameObject:
   - component: {fileID: 1617708775}
   - component: {fileID: 1617708774}
   m_Layer: 0
-  m_Name: Quad aka
+  m_Name: Quadaka
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!328 &1617708774
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -2950,7 +3000,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -3047,12 +3097,12 @@ GameObject:
   - component: {fileID: 1648756172}
   - component: {fileID: 1648756171}
   m_Layer: 0
-  m_Name: Quad murasaki
+  m_Name: Quadmurasaki
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!328 &1648756171
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -3082,7 +3132,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
@@ -3902,12 +3952,12 @@ GameObject:
   - component: {fileID: 1993822537}
   - component: {fileID: 1993822536}
   m_Layer: 0
-  m_Name: Quad ki
+  m_Name: Quadki
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!328 &1993822536
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -3937,7 +3987,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
