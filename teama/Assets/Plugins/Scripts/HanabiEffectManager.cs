@@ -11,16 +11,16 @@ public class HanabiEffectManager : MonoBehaviour
     [SerializeField] GameObject Quadmidori;
     [SerializeField] GameObject Quadmurasaki;
 
-    void OnEnable()
+    void Update()
     {
         if (Input.GetKey(KeyCode.B))
         {
-            Quadaka.gameObject.SetActive(true);
+            Quadki.gameObject.SetActive(true);
         }
 
         if (Input.GetKey(KeyCode.H))
         {
-            Quadki.gameObject.SetActive(true);
+            Quadmidori.gameObject.SetActive(true);
         }
 
         if (Input.GetKey(KeyCode.J))
@@ -30,12 +30,14 @@ public class HanabiEffectManager : MonoBehaviour
 
         if (Input.GetKey(KeyCode.K))
         {
-            Quadmidori.gameObject.SetActive(true);
+            Quadmurasaki.gameObject.SetActive(true);
         }
 
         if (Input.GetKey(KeyCode.L))
         {
-            Quadmurasaki.gameObject.SetActive(true);
+            Quadaka.gameObject.SetActive(true);
         }
     }
 }
+
+  

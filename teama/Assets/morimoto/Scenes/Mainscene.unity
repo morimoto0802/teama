@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FilePath: Charts/humen
-  ClipPath: Charts/AudioClip
+  ClipPath: Charts/honnbann
   Play: {fileID: 316961162}
   SetChart: {fileID: 588619137}
   aka: {fileID: 197425493}
@@ -1727,7 +1727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &775221157
 Transform:
   m_ObjectHideFlags: 0
@@ -1879,7 +1879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &855863713
 SpriteRenderer:
   m_ObjectHideFlags: 0

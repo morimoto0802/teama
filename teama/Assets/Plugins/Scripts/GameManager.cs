@@ -221,12 +221,16 @@ public class GameManager : MonoBehaviour
             {
                 NoteTimings[minDiffIndex] = -1;
                 Notes[minDiffIndex].SetActive(false);
+
+                MessageEffectSubject.OnNext("good");
                 Debug.Log("beat" + type + "success.");
             }
             else
             {
                 NoteTimings[minDiffIndex] = -1;
                 Notes[minDiffIndex].SetActive(false);
+
+                MessageEffectSubject.OnNext("failure");
                 Debug.Log("beat" + type + "failure.");
             }
         }
