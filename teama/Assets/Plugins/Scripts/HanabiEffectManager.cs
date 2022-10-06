@@ -16,11 +16,13 @@ public class HanabiEffectManager : MonoBehaviour
         if (Input.GetKey(KeyCode.B))
         {
             Quadki.gameObject.SetActive(true);
+            Invoke("TESTki", 2.0f);
         }
 
         if (Input.GetKey(KeyCode.H))
         {
             Quadmidori.gameObject.SetActive(true);
+            Invoke("TESTmidori", 2.0f);
         }
 
         if (Input.GetKey(KeyCode.J))
@@ -37,6 +39,15 @@ public class HanabiEffectManager : MonoBehaviour
         {
             Quadaka.gameObject.SetActive(true);
         }
+    }
+    private void TESTki()
+    {
+        Quadki.gameObject.SetActive(false);
+    }
+
+    private void TESTmidori()
+    {
+        Quadmidori.gameObject.SetActive(false);
     }
 }
 

@@ -184,8 +184,10 @@ public class GameManager : MonoBehaviour
             Note.GetComponent<NoteController>().setParameter(type, timing);
 
             Notes.Add(Note);
+            Debug.Log("notekazu" + Notes.Count);
             NoteTimings.Add(timing);
         }
+        Debug.Log("notekazu"+ Notes.Count) ;
     }
 
     void play()
