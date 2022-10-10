@@ -28,16 +28,19 @@ public class HanabiEffectManager : MonoBehaviour
         if (Input.GetKey(KeyCode.J))
         {
             Quadao.gameObject.SetActive(true);
+            Invoke("TESTao", 2.0f);
         }
 
         if (Input.GetKey(KeyCode.K))
         {
             Quadmurasaki.gameObject.SetActive(true);
+            Invoke("TESTmurasaki", 2.0f);
         }
 
         if (Input.GetKey(KeyCode.L))
         {
             Quadaka.gameObject.SetActive(true);
+            Invoke("TESTaka", 2.0f);
         }
     }
     private void TESTki()
@@ -48,6 +51,21 @@ public class HanabiEffectManager : MonoBehaviour
     private void TESTmidori()
     {
         Quadmidori.gameObject.SetActive(false);
+    }
+
+    private void TESTao()
+    {
+        Quadao.gameObject.SetActive(false);
+    }
+
+    private void TESTmurasaki()
+    {
+        Quadmurasaki.gameObject.SetActive(false);
+    }
+
+    private void TESTaka()
+    {
+        Quadaka.gameObject.SetActive(false);
     }
 }
 
