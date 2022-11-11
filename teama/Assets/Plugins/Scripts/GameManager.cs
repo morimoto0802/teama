@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Button Play;
     [SerializeField] Button SetChart;
 
+
     [SerializeField] GameObject aka;
     [SerializeField] GameObject ki;
     [SerializeField] GameObject ao;
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour
     float CheckRange;
     float BeatRange;
     List<float> NoteTimings;
+
+
 
     string Title;
     int BPM;
@@ -91,6 +94,7 @@ public class GameManager : MonoBehaviour
                 Notes[GoIndex].GetComponent<NoteController>().go(Distance, During);
                 GoIndex++;
             });
+
 
         this.UpdateAsObservable()
             .Where(_ => isPlaying)
@@ -187,8 +191,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("notekazu" + Notes.Count);
             NoteTimings.Add(timing);
         }
-        Debug.Log("notekazu"+ Notes.Count) ;
+        Debug.Log("notekazu" + Notes.Count);
     }
+
 
     void play()
     {
@@ -209,7 +214,7 @@ public class GameManager : MonoBehaviour
             if (NoteTimings[i] > 0)
             {
                 float diff = Math.Abs(NoteTimings[i] - timing);
-                if(minDiff == -1 || minDiff > diff)
+                if (minDiff == -1 || minDiff > diff)
                 {
                     minDiff = diff;
                     minDiffIndex = i;
@@ -217,9 +222,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(minDiff != -1 & minDiff < CheckRange)
+        if (minDiff != -1 & minDiff < CheckRange)
         {
-            if(minDiff < BeatRange & Notes[minDiffIndex].GetComponent<NoteController>().getType() == type)
+            if (minDiff < BeatRange & Notes[minDiffIndex].GetComponent<NoteController>().getType() == type)
             {
                 NoteTimings[minDiffIndex] = -1;
                 Notes[minDiffIndex].SetActive(false);
