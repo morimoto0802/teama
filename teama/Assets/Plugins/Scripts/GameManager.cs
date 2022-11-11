@@ -1,36 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
 
 public class GameManager : MonoBehaviour
 {
+
     [SerializeField] string FilePath;
     [SerializeField] string ClipPath;
 
     [SerializeField] Button Play;
     [SerializeField] Button SetChart;
+    [SerializeField] Text ScoreText; // ’Ç‰Á
+    [SerializeField] Text ComboText; // ’Ç‰Á
+    [SerializeField] Text TitleText; // ’Ç‰Á
 
+    [SerializeField] GameObject Don;
+    [SerializeField] GameObject Ka;
 
-    [SerializeField] GameObject aka;
-    [SerializeField] GameObject ki;
-    [SerializeField] GameObject ao;
-    [SerializeField] GameObject midori;
-    [SerializeField] GameObject murasaki;
-
-    [SerializeField] Transform SpawnPointaka;
-    [SerializeField] Transform SpawnPointki;
-    [SerializeField] Transform SpawnPointao;
-    [SerializeField] Transform SpawnPointmidori;
-    [SerializeField] Transform SpawnPointmurasaki;
-    [SerializeField] Transform BeatPointaka;
-    [SerializeField] Transform BeatPointki;
-    [SerializeField] Transform BeatPointao;
-    [SerializeField] Transform BeatPointmidori;
-    [SerializeField] Transform BeatPointmurasaki;
+    [SerializeField] Transform SpawnPoint;
+    [SerializeField] Transform BeatPoint;
 
     AudioSource Music;
 
@@ -44,7 +36,12 @@ public class GameManager : MonoBehaviour
     float BeatRange;
     List<float> NoteTimings;
 
-
+    float ComboCount; // ’Ç‰Á
+    float Score; // ’Ç‰Á
+    float ScoreFirstTerm; // ’Ç‰Á
+    float ScoreTorerance; // ’Ç‰Á
+    float ScoreCeilingPoint; // ’Ç‰Á
+    int CheckTimingIndex; // ’Ç‰Á
 
     string Title;
     int BPM;
@@ -67,7 +64,8 @@ public class GameManager : MonoBehaviour
     void OnEnable()
     {
         Music = this.GetComponent<AudioSource>();
-        Distance = Math.Abs(BeatPointaka.position.y - SpawnPointaka.position.y);
+
+        Distance = Math.Abs(BeatPoint.position.x - SpawnPoint.position.x);
         During = 2 * 1000;
         isPlaying = false;
         GoIndex = 0;
@@ -75,71 +73,59 @@ public class GameManager : MonoBehaviour
         CheckRange = 120;
         BeatRange = 80;
 
-        Debug.Log(Distance);
+        ScoreCeilingPoint = 1050000;
+        CheckTimingIndex = 0;
 
         Play.onClick
-           .AsObservable()
-           .Subscribe(_ => play());
+        .AsObservable()
+        .Subscribe(_ => play());
 
         SetChart.onClick
-            .AsObservable()
-            .Subscribe(_ => loadChart());
+        .AsObservable()
+        .Subscribe(_ => loadChart());
 
         this.UpdateAsObservable()
-            .Where(_ => isPlaying)
-            .Where(_ => Notes.Count > GoIndex)
-            .Where(_ => Notes[GoIndex].GetComponent<NoteController>().getTiming() <= ((Time.time * 1000 - PlayTime) + During))
-            .Subscribe(_ =>
-            {
-                Notes[GoIndex].GetComponent<NoteController>().go(Distance, During);
-                GoIndex++;
-            });
+        .Where(_ => isPlaying)
+        .Where(_ => Notes.Count > GoIndex)
+        .Where(_ => Notes[GoIndex].GetComponent<NoteController>().getTiming() <= ((Time.time * 1000 - PlayTime) + During))
+        .Subscribe(_ => {
+            Notes[GoIndex].GetComponent<NoteController>().go(Distance, During);
+            GoIndex++;
+        });
 
+        // ’Ç‰Á
+        this.UpdateAsObservable()
+        .Where(_ => isPlaying)
+        .Where(_ => Notes.Count > CheckTimingIndex)
+        .Where(_ => NoteTimings[CheckTimingIndex] == -1)
+        .Subscribe(_ => CheckTimingIndex++);
+
+        // ’Ç‰Á
+        this.UpdateAsObservable()
+        .Where(_ => isPlaying)
+        .Where(_ => Notes.Count > CheckTimingIndex)
+        .Where(_ => NoteTimings[CheckTimingIndex] != -1)
+        .Where(_ => NoteTimings[CheckTimingIndex] < ((Time.time * 1000 - PlayTime) - CheckRange / 2))
+        .Subscribe(_ => {
+            updateScore("failure");
+            CheckTimingIndex++;
+        });
 
         this.UpdateAsObservable()
-            .Where(_ => isPlaying)
-            .Where(_ => Input.GetKeyDown(KeyCode.B))
-            .Subscribe(_ =>
-            {
-                beat("ki", Time.time * 1000 - PlayTime);
-                SoundEffectSubject.OnNext("ki");
-            });
+        .Where(_ => isPlaying)
+        .Where(_ => Input.GetKeyDown(KeyCode.D))
+        .Subscribe(_ => {
+            beat("don", Time.time * 1000 - PlayTime);
+            SoundEffectSubject.OnNext("don");
+        });
 
         this.UpdateAsObservable()
-            .Where(_ => isPlaying)
-            .Where(_ => Input.GetKeyDown(KeyCode.H))
-            .Subscribe(_ =>
-            {
-                beat("midori", Time.time * 1000 - PlayTime);
-                SoundEffectSubject.OnNext("midori");
-            });
-
-        this.UpdateAsObservable()
-            .Where(_ => isPlaying)
-            .Where(_ => Input.GetKeyDown(KeyCode.J))
-            .Subscribe(_ =>
-            {
-                beat("ao", Time.time * 1000 - PlayTime);
-                SoundEffectSubject.OnNext("ao");
-            });
-
-        this.UpdateAsObservable()
-            .Where(_ => isPlaying)
-            .Where(_ => Input.GetKeyDown(KeyCode.K))
-            .Subscribe(_ =>
-            {
-                beat("murasaki", Time.time * 1000 - PlayTime);
-                SoundEffectSubject.OnNext("murasaki");
-            });
-
-        this.UpdateAsObservable()
-            .Where(_ => isPlaying)
-            .Where(_ => Input.GetKeyDown(KeyCode.L))
-            .Subscribe(_ =>
-            {
-                beat("aka", Time.time * 1000 - PlayTime);
-                SoundEffectSubject.OnNext("aka");
-            });
+        .Where(_ => isPlaying)
+        .Where(_ => Input.GetKeyDown(KeyCode.K))
+        .Subscribe(_ => {
+            beat("ka", Time.time * 1000 - PlayTime);
+            SoundEffectSubject.OnNext("ka");
+        });
     }
 
     void loadChart()
@@ -158,42 +144,55 @@ public class GameManager : MonoBehaviour
         {
             string type = note["type"].Get<string>();
             float timing = float.Parse(note["timing"].Get<string>());
-            Debug.Log("TEST");
+
             GameObject Note;
-            if (type == "aka")
+            if (type == "don")
             {
-                Note = Instantiate(aka, SpawnPointaka.position, Quaternion.identity);
+                Note = Instantiate(Don, SpawnPoint.position, Quaternion.identity);
             }
-            else if (type == "ki")
+            else if (type == "ka")
             {
-                Note = Instantiate(ki, SpawnPointki.position, Quaternion.identity);
-            }
-            else if (type == "ao")
-            {
-                Note = Instantiate(ao, SpawnPointao.position, Quaternion.identity);
-            }
-            else if (type == "midori")
-            {
-                Note = Instantiate(midori, SpawnPointmidori.position, Quaternion.identity);
-            }
-            else if (type == "murasaki")
-            {
-                Note = Instantiate(murasaki, SpawnPointmurasaki.position, Quaternion.identity);
+                Note = Instantiate(Ka, SpawnPoint.position, Quaternion.identity);
             }
             else
             {
-                Note = Instantiate(aka, SpawnPointaka.position, Quaternion.identity);
+                Note = Instantiate(Don, SpawnPoint.position, Quaternion.identity); // default don
             }
-
             Note.GetComponent<NoteController>().setParameter(type, timing);
 
             Notes.Add(Note);
-            Debug.Log("notekazu" + Notes.Count);
             NoteTimings.Add(timing);
         }
-        Debug.Log("notekazu" + Notes.Count);
-    }
 
+        TitleText.text = Title;  // ’Ç‰Á
+
+        // ’Ç‰Á
+        if (Notes.Count < 10)
+        {
+            ScoreFirstTerm = (float)Math.Round(ScoreCeilingPoint / Notes.Count);
+            ScoreTorerance = 0;
+        }
+        else if (10 <= Notes.Count && Notes.Count < 30)
+        {
+            ScoreFirstTerm = 300;
+            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (Notes.Count - 9));
+        }
+        else if (30 <= Notes.Count && Notes.Count < 50)
+        {
+            ScoreFirstTerm = 300;
+            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (2 * (Notes.Count - 19)));
+        }
+        else if (50 <= Notes.Count && Notes.Count < 100)
+        {
+            ScoreFirstTerm = 300;
+            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (4 * (Notes.Count - 39)));
+        }
+        else
+        {
+            ScoreFirstTerm = 300;
+            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (4 * (3 * Notes.Count - 232)));
+        }
+    }
 
     void play()
     {
@@ -209,7 +208,7 @@ public class GameManager : MonoBehaviour
         float minDiff = -1;
         int minDiffIndex = -1;
 
-        for (int i = 0; i < NoteTimings.Count; i++)
+        for (int i = 0; i < Notes.Count; i++)
         {
             if (NoteTimings[i] > 0)
             {
@@ -230,7 +229,8 @@ public class GameManager : MonoBehaviour
                 Notes[minDiffIndex].SetActive(false);
 
                 MessageEffectSubject.OnNext("good");
-                Debug.Log("beat" + type + "success.");
+                updateScore("good"); // ’Ç‰Á
+                                     // Debug.Log("beat " + type + " success.");
             }
             else
             {
@@ -238,13 +238,57 @@ public class GameManager : MonoBehaviour
                 Notes[minDiffIndex].SetActive(false);
 
                 MessageEffectSubject.OnNext("failure");
-                Debug.Log("beat" + type + "failure.");
+                updateScore("false"); // ’Ç‰Á
+                                      // Debug.Log("beat " + type + " failure.");
             }
         }
         else
         {
-            Debug.Log("though");
+            // Debug.Log("through");
         }
     }
-}
 
+    // ’Ç‰Á
+    void updateScore(string result)
+    {
+        if (result == "good")
+        {
+            ComboCount++;
+
+            float plusScore;
+            if (ComboCount < 10)
+            {
+                plusScore = ScoreFirstTerm;
+            }
+            else if (10 <= ComboCount && ComboCount < 30)
+            {
+                plusScore = ScoreFirstTerm + ScoreTorerance;
+            }
+            else if (30 <= ComboCount && ComboCount < 50)
+            {
+                plusScore = ScoreFirstTerm + ScoreTorerance * 2;
+            }
+            else if (50 <= ComboCount && ComboCount < 100)
+            {
+                plusScore = ScoreFirstTerm + ScoreTorerance * 4;
+            }
+            else
+            {
+                plusScore = ScoreFirstTerm + ScoreTorerance * 8;
+            }
+
+            Score += plusScore;
+        }
+        else if (result == "failure")
+        {
+            ComboCount = 0;
+        }
+        else
+        {
+            ComboCount = 0; // default failure
+        }
+
+        ComboText.text = ComboCount.ToString();
+        ScoreText.text = Score.ToString();
+    }
+}
