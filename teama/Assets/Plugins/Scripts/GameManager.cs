@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Button Play;
     [SerializeField] Button SetChart;
+    [SerialiseField] Text ScoreText; //追加
+    [SerialiseField] Text ComboText; //追加
+    [SerialiseField] Text TitleText; //追加
 
     [SerializeField] GameObject aka;
     [SerializeField] GameObject ki;
@@ -42,6 +45,13 @@ public class GameManager : MonoBehaviour
     float CheckRange;
     float BeatRange;
     List<float> NoteTimings;
+
+    float ComboCount; //追加
+    float Score; //追加
+    float ScoreFirstTerm; //追加
+    float ScoreTorerance; //追加
+    float ScoreCeilingPoint; //追加
+    int CheckTimingIndex; //追加
 
     string Title;
     int BPM;
@@ -90,6 +100,25 @@ public class GameManager : MonoBehaviour
             {
                 Notes[GoIndex].GetComponent<NoteController>().go(Distance, During);
                 GoIndex++;
+            });
+
+        //追加
+        this.UpdateAsObservable()
+            .where(_ => isPlaying)
+            .where(_ => Notes.Count > CheckTimindIndex)
+            .where(_ => NoteTimings[CheckTimingIndex] == -1)
+            .Subscribe(_ => CheckTimingIndex++);
+
+        //追加
+        this.UpdateAsObservable()
+            .where(_ => isPlaying)
+            .where(_ => Notes.Count > CheckTimingIndex)
+            .where(_ => NotesTimings[CheckTimingIndex] != -1)
+            .where(_ => NoteTimings[CheckTimingIndex] < ((PlayTime.time * 1000 - PlayTime) - CheckRange / 2))
+            .Subscribe(_ =>
+            {
+                updateScore("failure");
+                CheckTimingIndex++;
             });
 
         this.UpdateAsObservable()
@@ -188,7 +217,33 @@ public class GameManager : MonoBehaviour
             NoteTimings.Add(timing);
         }
         Debug.Log("notekazu"+ Notes.Count) ;
-    }
+
+        TitleText.text = Title; //追加
+
+        //追加
+        if(Notes.Count < 10)
+        {
+            ScoreFirstTerm = (float)Math.Round(ScoreCeilingPoint / Notes.Count);
+            ScoreTorerance = 0;
+        }else if(10 <= Note.Count && Notes.Count < 30)
+        {
+            ScoreFirstTerm = 300;
+            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (Notes.Count - 9));
+        }else if(30 <= Note.Count && Notes.Count < 50)
+        {
+            ScoreFirstTerm = 300;
+            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (2 * (Notes.Count - 19)));
+        }else if(50 <= Notes.Count && Notes.Count < 100)
+        {
+            ScoreFirstTerm = 300;
+            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (4 * (Notes.Count - 39)));
+        }
+        else
+        {
+            ScoreFirstTerm = 300;
+            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (4 * (3 * Notes.Count - 232)));
+        }
+    }　//ここまでインデントは合っているはず
 
     void play()
     {
