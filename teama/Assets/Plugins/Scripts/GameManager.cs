@@ -104,17 +104,17 @@ public class GameManager : MonoBehaviour
 
         //’Ç‰Á
         this.UpdateAsObservable()
-            .Where(_ => isPlaying)
-            .Where(_ => Notes.Count > CheckTimingIndex)
-            .Where(_ => NoteTimings[CheckTimingIndex] == -1)
+            .where(_ => isPlaying)
+            .where(_ => Notes.Count > CheckTimindIndex)
+            .where(_ => NoteTimings[CheckTimingIndex] == -1)
             .Subscribe(_ => CheckTimingIndex++);
 
         //’Ç‰Á
         this.UpdateAsObservable()
-            .Where(_ => isPlaying)
-            .Where(_ => Notes.Count > CheckTimingIndex)
-            .Where(_ => NoteTimings[CheckTimingIndex] != -1)
-            .Where(_ => NoteTimings[CheckTimingIndex] < ((PlayTime * 1000 - PlayTime) - CheckRange / 2))
+            .where(_ => isPlaying)
+            .where(_ => Notes.Count > CheckTimingIndex)
+            .where(_ => NotesTimings[CheckTimingIndex] != -1)
+            .where(_ => NoteTimings[CheckTimingIndex] < ((PlayTime.time * 1000 - PlayTime) - CheckRange / 2))
             .Subscribe(_ =>
             {
                 updateScore("failure");
