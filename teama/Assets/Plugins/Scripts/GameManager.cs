@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
 
@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Button Play;
     [SerializeField] Button SetChart;
-    [SerialiseField] Text ScoreText; //’Ç‰Á
-    [SerialiseField] Text ComboText; //’Ç‰Á
-    [SerialiseField] Text TitleText; //’Ç‰Á
+    [SerializeField] Text ScoreText; //’Ç‰Á
+    [SerializeField] Text ComboText; //’Ç‰Á
+    [SerializeField] Text TitleText; //’Ç‰Á
 
     [SerializeField] GameObject aka;
     [SerializeField] GameObject ki;
@@ -50,8 +50,8 @@ public class GameManager : MonoBehaviour
     float Score; //’Ç‰Á
     float ScoreFirstTerm; //’Ç‰Á
     float ScoreTorerance; //’Ç‰Á
-    float ScoreCeilingPoint; //’Ç‰Á
-    int CheckTimingIndex; //’Ç‰Á
+    float ScoreCeilingPoint = 1050000; //’Ç‰Á
+    int CheckTimingIndex = 0; //’Ç‰Á
 
     string Title;
     int BPM;
@@ -225,11 +225,11 @@ public class GameManager : MonoBehaviour
         {
             ScoreFirstTerm = (float)Math.Round(ScoreCeilingPoint / Notes.Count);
             ScoreTorerance = 0;
-        }else if(10 <= Note.Count && Notes.Count < 30)
+        }else if(10 <= Notes.Count && Notes.Count < 30)
         {
             ScoreFirstTerm = 300;
             ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (Notes.Count - 9));
-        }else if(30 <= Note.Count && Notes.Count < 50)
+        }else if(30 <= Notes.Count && Notes.Count < 50)
         {
             ScoreFirstTerm = 300;
             ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (2 * (Notes.Count - 19)));
@@ -280,6 +280,7 @@ public class GameManager : MonoBehaviour
                 Notes[minDiffIndex].SetActive(false);
 
                 MessageEffectSubject.OnNext("good");
+                updateScore("good"); //’Ç‰Á
                 Debug.Log("beat" + type + "success.");
             }
             else
@@ -288,6 +289,7 @@ public class GameManager : MonoBehaviour
                 Notes[minDiffIndex].SetActive(false);
 
                 MessageEffectSubject.OnNext("failure");
+                updateScore("false"); //’Ç‰Á
                 Debug.Log("beat" + type + "failure.");
             }
         }
@@ -296,5 +298,49 @@ public class GameManager : MonoBehaviour
             Debug.Log("though");
         }
     }
+
+    //’Ç‰Á
+    void updateScore(string result)
+    {
+        if(result == "good")
+        {
+            ComboCount++;
+
+            float plusScore;
+            if (ComboCount < 10)
+            {
+                plusScore = ScoreFirstTerm;
+            }
+            else if (10 <= ComboCount && ComboCount < 30)
+            {
+                plusScore = ScoreFirstTerm + ScoreTorerance;
+            }
+            else if (30 <= ComboCount && ComboCount < 50)
+            {
+                plusScore = ScoreFirstTerm + ScoreTorerance * 2;
+            }
+            else if (50 <= ComboCount && ComboCount < 100)
+            {
+                plusScore = ScoreFirstTerm + ScoreTorerance * 4;
+            }
+            else
+            {
+                plusScore = ScoreFirstTerm + ScoreTorerance * 8;
+            }
+
+            Score += plusScore;
+        }
+        else if (result == "failure")
+        {
+            ComboCount = 0;
+        }
+        else
+        {
+            ComboCount = 0;
+        }
+
+        ComboText.text = ComboCount.ToString();
+        ScoreText.text = Score.ToString();
+    } 
 }
 
