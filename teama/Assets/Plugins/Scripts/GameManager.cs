@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,9 +14,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Button Play;
     [SerializeField] Button SetChart;
-    [SerializeField] Text ScoreText; //’Ç‰Á
-    [SerializeField] Text ComboText; //’Ç‰Á
-    [SerializeField] Text TitleText; //’Ç‰Á
+    [SerializeField] TextMeshProUGUI ScoreText; //’Ç‰Á
+    [SerializeField] TextMeshProUGUI ComboText; //’Ç‰Á
+    [SerializeField] TextMeshProUGUI TitleText; //’Ç‰Á
 
     [SerializeField] GameObject aka;
     [SerializeField] GameObject ki;
