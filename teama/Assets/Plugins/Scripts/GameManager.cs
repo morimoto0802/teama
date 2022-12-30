@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UniRx;
 using UniRx.Triggers;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,9 +49,9 @@ public class GameManager : MonoBehaviour
     List<float> NoteTimings;
 
     float ComboCount; //追加
-    float Score; //追加
-    float ScoreFirstTerm; //追加
-    float ScoreTorerance; //追加
+    static int Score = 0; //追加
+    int ScoreFirstTerm; //追加
+    int ScoreTorerance; //追加
     float ScoreCeilingPoint = 1050000; //追加
     int CheckTimingIndex = 0; //追加
 
@@ -224,25 +225,25 @@ public class GameManager : MonoBehaviour
         //追加
         if(Notes.Count < 10)
         {
-            ScoreFirstTerm = (float)Math.Round(ScoreCeilingPoint / Notes.Count);
+            ScoreFirstTerm = (int)Math.Round(ScoreCeilingPoint / Notes.Count);
             ScoreTorerance = 0;
         }else if(10 <= Notes.Count && Notes.Count < 30)
         {
             ScoreFirstTerm = 300;
-            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (Notes.Count - 9));
+            ScoreTorerance = (int)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (Notes.Count - 9));
         }else if(30 <= Notes.Count && Notes.Count < 50)
         {
             ScoreFirstTerm = 300;
-            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (2 * (Notes.Count - 19)));
+            ScoreTorerance = (int)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (2 * (Notes.Count - 19)));
         }else if(50 <= Notes.Count && Notes.Count < 100)
         {
             ScoreFirstTerm = 300;
-            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (4 * (Notes.Count - 39)));
+            ScoreTorerance = (int)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (4 * (Notes.Count - 39)));
         }
         else
         {
             ScoreFirstTerm = 300;
-            ScoreTorerance = (float)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (4 * (3 * Notes.Count - 232)));
+            ScoreTorerance = (int)Math.Floor((ScoreCeilingPoint - ScoreFirstTerm * Notes.Count) / (4 * (3 * Notes.Count - 232)));
         }
     }　//ここまでインデントは合っているはず
 
@@ -253,6 +254,14 @@ public class GameManager : MonoBehaviour
         PlayTime = Time.time * 1000;
         isPlaying = true;
         Debug.Log("Game Start!");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("ScoreScene");
+        }
     }
 
     void beat(string type, float timing)
@@ -307,7 +316,7 @@ public class GameManager : MonoBehaviour
         {
             ComboCount++;
 
-            float plusScore;
+            int plusScore;
             if (ComboCount < 10)
             {
                 plusScore = ScoreFirstTerm;
@@ -342,6 +351,11 @@ public class GameManager : MonoBehaviour
 
         ComboText.text = ComboCount.ToString();
         ScoreText.text = Score.ToString();
-    } 
+    }
+    
+    public static int getscore()
+    {
+        return Score;
+    }
 }
 

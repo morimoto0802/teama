@@ -16,6 +16,6 @@ public class StartButton : MonoBehaviour
     public void Next()
     {
         //ここで移りたいシーンを指定します。
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Mainscene");
     }
 }
