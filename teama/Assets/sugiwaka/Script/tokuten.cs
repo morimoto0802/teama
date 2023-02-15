@@ -14,7 +14,7 @@ public class tokuten : MonoBehaviour
     {
         score = GameManager.getscore();//PlayerControllerÇ…ÉVÅ[ÉìÇÃñºëO
 
-        ScoreText.text = string.Format("Score:{0}", score);
+        ScoreText.text = string.Format(":{0}", score);
     }
 
     // Update is called once per frame
