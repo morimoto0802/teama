@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc46060153a5ba4491b5b8d7ef7eb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FilePath: Charts/ParkBeat
+  FilePath: Charts/humen
   ClipPath: Charts/honnbann
   Play: {fileID: 316961162}
   SetChart: {fileID: 588619137}
@@ -3982,7 +3982,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Title
+  m_text: parkbeat
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
