@@ -357,5 +357,10 @@ public class GameManager : MonoBehaviour
     {
         return Score;
     }
+
+    void Start()
+    {
+        Score = 0;
+    }
 }
 
