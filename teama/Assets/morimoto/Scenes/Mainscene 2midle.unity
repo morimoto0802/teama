@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc46060153a5ba4491b5b8d7ef7eb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FilePath: Charts/ParkBeatmidle
+  FilePath: Charts/ParkBeat
   ClipPath: Charts/honnbann
   Play: {fileID: 316961162}
   SetChart: {fileID: 588619137}
@@ -1560,7 +1560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -3574,7 +3573,8 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 2100000, guid: e84cad992ebc8de44ba5f3667c38e4ac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3722,7 +3722,8 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 2100000, guid: b702c2533d65d3a4fab0ca581dd54c5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
