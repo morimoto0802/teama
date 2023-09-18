@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class tokuten : MonoBehaviour
+public class Tokuten : MonoBehaviour
 {
     public TextMeshProUGUI ScoreText;
     int score;

@@ -4,18 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class StartButton : MonoBehaviour
+public class NanidoSelectButton: MonoBehaviour
 {
+    public string sceneName; // シーン名を格納する変数
+
     public void Onclick()
     {
         AudioSource audio = GetComponent<AudioSource>();
         audio.Play();
 
-        Invoke("Next", 0.8f);
+        Invoke("Select", 0.8f);
     }
-    public void Next()
+    public void Select()
     {
         //ここで移りたいシーンを指定します。
-        SceneManager.LoadScene("StageSelectScene");
+        SceneManager.LoadScene("sceneName");
     }
 }
+
